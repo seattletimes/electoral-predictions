@@ -5,9 +5,18 @@
 require("component-responsive-frame/child");
 var savage = require("savage-query");
 var $ = require("jquery");
+var qsa = require("./lib/qsa");
 var closest = require("./lib/closest");
 
 var count = 50;
+
+var states = qsa("g").filter(function(s) {
+  return s.getAttribute("data-name");
+}).concat(qsa("polygon").filter(function(s) {
+  return s.getAttribute("data-name");
+})).concat(qsa("path").filter(function(s) {
+  return s.getAttribute("data-name");
+}));
 
 $(".st0").click(function(e) {
   var state = e.target;
@@ -52,22 +61,31 @@ form.on("change keyup", function() {
 
 submit.on("click", function(e) {
   if (!validated) return;
+
   var self = this;
   e.preventDefault();
 
-  //handle form elements correctly
   var packet = {};
-  // inputs.each(function(i, el) {
-  //   packet[el.name] = el.value;
-  // });
   
   packet.method = "prediction";
   packet.name = document.querySelector(".name input").value;
   packet.email = document.querySelector(".email input").value;
   packet.phone = document.querySelector(".phone input").value;
   packet.timestamp = moment(Date.now()).format('MM/DD/YY h:mm a');
-  packet.red = "testing";
-  packet.blue = "testing";
+
+  var redArray = "";
+  var blueArray = "";
+
+  states.forEach(function(state) {
+    if (state.getAttribute("class") && state.getAttribute("class").includes("red")) {
+      redArray += state.getAttribute("data-name") + " ";
+    } else if (state.getAttribute("class") && state.getAttribute("class").includes("blue")) {
+      blueArray += state.getAttribute("data-name") + " ";
+    }
+  });
+
+  packet.red = redArray;
+  packet.blue = blueArray;
 
   var submission = $.ajax({
     url: endpoint,
@@ -82,9 +100,9 @@ submit.on("click", function(e) {
     messageSending.removeClass("visible");
     messageSuccess.addClass("visible");
     validated = false;
-    form.removeClass("validated");
+    submit.removeClass("validated");
     inputs.each(function(i, el) {
-      el.innerHTML = "";
+      el.value = "";
     })
   });
 
