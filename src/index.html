@@ -10,6 +10,17 @@
       <div class="container">
         <div class="count-container"><span class="count">50</span> states remaining</div>
         <%= t.include("./assets/US_map.svg") %>
+
+        <div class="form-panel">
+          <form>
+            <div class="name">Name <input maxlength="75" name="name" placeholder="" required></div>
+            <div class="email">Email <input maxlength="75" name="email" placeholder="" required></div>
+            <div class="phone">Phone <input maxlength="75" name="phone" placeholder="" required></div>
+          </form>
+          <button class="submit">SUBMIT</button>
+          <div class="message sending">Sending</div>
+          <div class="message success">Success</div>
+        </div>
       </div>
     </responsive-child>
 
