@@ -3,8 +3,8 @@
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="960px" height="693px" viewBox="0 0 960 693" style="enable-background:new 0 0 960 693;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#F0E5D5;stroke:#998E7B;stroke-width:0.35;stroke-linecap:round;stroke-linejoin:round;}
-	.st1{fill:none;stroke:#808285;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2;}
+	.st0{fill:#F0E5D5;stroke:#666;stroke-width:0.35;stroke-linecap:round;stroke-linejoin:round;}
+	.st1{fill:none;stroke:#666;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2;}
 </style>
 <g id="land">
 	<polygon data-name="NV" class="st0" points="189.5,190.2 177.1,187.7 161.9,184.6 144.7,180.9 144.3,180.7 125.1,176.3 106.7,171.9 106.1,171.8 

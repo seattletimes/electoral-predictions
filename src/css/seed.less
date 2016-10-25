@@ -5,6 +5,10 @@ body {
   margin: auto;
 }
 
+.inner {
+  margin: 40px 0;
+}
+
 .container {
   position: relative;
   padding-bottom: 75%;
@@ -12,12 +16,13 @@ body {
 
 .count-container {
   font-family: @df-sans;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: bold;
+  padding-top: 20px;
+  text-align: center;
 }
 
 svg {
-  margin-top: 200px;
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -45,6 +50,19 @@ g {
   }
 }
 
+form {
+  display: inline-block;
+  div {
+    display: inline-block;
+    font-family: @df-sans;
+    font-size: 14px;
+
+    input {
+      margin: 0 12px 0 4px;
+    }
+  }
+}
+
 .message {
   display: none;
 
@@ -59,11 +77,11 @@ button {
   background: @df-dark-gray;
   font-size: 14px;
   font-weight: bold;
-  margin-top: 15px;
   border-radius: 2px;
   color: white;
   opacity: 0.5;
   transition: all 0.3s linear;
+  display: inline-block;
 
   &.validated {
     opacity: 1;
