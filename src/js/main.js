@@ -31,7 +31,13 @@ $(".st0").click(function(e) {
     savage(state).addClass("red");
   }
   count = 50 - $(".red").length - $(".blue").length;
-  $(".count").html(count);
+  if (count == 0) {
+    $(".count-container").html("You're done!");
+  } else if (count == 1) {
+    $(".count-container").html("1 state to go!");
+  } else {
+    $(".count").html(count);
+  }
 })
 
 var moment = require("moment");
