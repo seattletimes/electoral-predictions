@@ -18,7 +18,33 @@ var states = qsa("g").filter(function(s) {
   return s.getAttribute("data-name");
 }));
 
+var moment = require("moment");
+
+var panel = $(".form-panel");
+var endpoint = "https://script.google.com/macros/s/AKfycbzHpXlH3ojpgoKRbOYmT9hrqkhx8S7CilllG3oHMWO2VWK7BW5O/exec";
+
+var messageSending = panel.find(".message.sending");
+var messageSuccess = panel.find(".message.success")
+var submit = panel.find(".submit");
+var form = panel.find("form");
+var inputs = form.find("input");
+
+var formValidated = false;
+var mapValidated = false;
+
+var submitted = false;
+
+var validate = function() {
+  if (formValidated && mapValidated) {
+    submit.addClass("validated");
+  } else {
+    submit.removeClass("validated");
+  }
+}
+
 $(".st0").click(function(e) {
+  if (submitted) return;
+
   var state = e.target;
   if (!state.getAttribute("data-name")) {
     state = state.closest("g");
@@ -38,35 +64,23 @@ $(".st0").click(function(e) {
   } else {
     $(".count").html(count);
   }
+
+  mapValidated = true;
+  if (count !== 0) mapValidated = false;
+  validate();
 })
 
-var moment = require("moment");
-
-var panel = $(".form-panel");
-var endpoint = "https://script.google.com/macros/s/AKfycbzHpXlH3ojpgoKRbOYmT9hrqkhx8S7CilllG3oHMWO2VWK7BW5O/exec";
-
-var messageSending = panel.find(".message.sending");
-var messageSuccess = panel.find(".message.success")
-var submit = panel.find(".submit");
-var form = panel.find("form");
-var inputs = form.find("input");
-var validated = false;
-
 form.on("change keyup", function() {
-  validated = true;
+  formValidated = true;
   inputs.each(function(i, el) {
-    if (!el.value) validated = false;
+    if (!el.value) formValidated = false;
   });
 
-  if (validated) {
-    submit.addClass("validated");
-  } else {
-    submit.removeClass("validated");
-  }
+  validate();
 })
 
 submit.on("click", function(e) {
-  if (!validated) return;
+  if (!(mapValidated && formValidated)) return;
 
   var self = this;
   e.preventDefault();
@@ -105,11 +119,21 @@ submit.on("click", function(e) {
   submission.done(function(data) {
     messageSending.removeClass("visible");
     messageSuccess.addClass("visible");
-    validated = false;
+    formValidated = false;
+    mapValidated = false;
     submit.removeClass("validated");
     inputs.each(function(i, el) {
       el.value = "";
     })
+    $(".count-container").html("Thanks for your submission.");
+    submitted = true;
+    $("svg").addClass("submitted");
+    // qsa(".blue").forEach(function(b) {
+    //   savage(b).removeClass("blue");
+    // });
+    // qsa(".red").forEach(function(r) {
+    //   savage(r).removeClass("red");
+    // });
   });
 
 });
