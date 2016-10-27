@@ -8,7 +8,7 @@ var $ = require("jquery");
 var qsa = require("./lib/qsa");
 var closest = require("./lib/closest");
 
-var count = 50;
+var count = 51;
 
 var states = qsa("g").filter(function(s) {
   return s.getAttribute("data-name");
@@ -16,8 +16,8 @@ var states = qsa("g").filter(function(s) {
   return s.getAttribute("data-name");
 })).concat(qsa("path").filter(function(s) {
   return s.getAttribute("data-name");
-})).concat(qsa("text").filter(function(s) {
-  return s.innerHTML == "DC";
+})).concat(qsa("circle").filter(function(s) {
+  return s.getAttribute("data-name");
 }));
 
 var moment = require("moment");
@@ -58,7 +58,7 @@ $(".st0").click(function(e) {
     savage(state).removeClass("blue");
     savage(state).addClass("red");
   }
-  count = 50 - $(".red").length - $(".blue").length;
+  count = 51 - $(".red").length - $(".blue").length;
   if (count == 0) {
     $(".count-container").html("You're done!");
   } else if (count == 1) {
@@ -80,8 +80,6 @@ $("text").click(function(e) {
     return s.getAttribute("data-name") == stateLabel;
   })[0];
 
-  console.log(match)
-
   if (match.getAttribute("class") && match.getAttribute("class").includes("red")) {
     savage(match).removeClass("red");
     savage(match).addClass("blue");
@@ -89,7 +87,7 @@ $("text").click(function(e) {
     savage(match).removeClass("blue");
     savage(match).addClass("red");
   }
-  count = 50 - $(".red").length - $(".blue").length;
+  count = 51 - $(".red").length - $(".blue").length;
   if (count == 0) {
     $(".count-container").html("You're done!");
   } else if (count == 1) {
