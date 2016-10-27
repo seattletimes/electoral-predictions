@@ -16,6 +16,8 @@ var states = qsa("g").filter(function(s) {
   return s.getAttribute("data-name");
 })).concat(qsa("path").filter(function(s) {
   return s.getAttribute("data-name");
+})).concat(qsa("text").filter(function(s) {
+  return s.innerHTML == "DC";
 }));
 
 var moment = require("moment");
@@ -69,6 +71,37 @@ $(".st0").click(function(e) {
   if (count !== 0) mapValidated = false;
   validate();
 })
+
+$("text").click(function(e) {
+  if (submitted) return;
+
+  var stateLabel = e.target.innerHTML;
+  var match = states.filter(function(s) {
+    return s.getAttribute("data-name") == stateLabel;
+  })[0];
+
+  console.log(match)
+
+  if (match.getAttribute("class") && match.getAttribute("class").includes("red")) {
+    savage(match).removeClass("red");
+    savage(match).addClass("blue");
+  } else {
+    savage(match).removeClass("blue");
+    savage(match).addClass("red");
+  }
+  count = 50 - $(".red").length - $(".blue").length;
+  if (count == 0) {
+    $(".count-container").html("You're done!");
+  } else if (count == 1) {
+    $(".count-container").html("1 state to go!");
+  } else {
+    $(".count").html(count);
+  }
+
+  mapValidated = true;
+  if (count !== 0) mapValidated = false;
+  validate();
+});
 
 form.on("change keyup", function() {
   formValidated = true;
