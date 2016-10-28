@@ -62,17 +62,20 @@ $(".tile-container").click(function(e) {
     savage(state).addClass("blue");
     tile.classList.remove("red");
     tile.classList.add("blue");
-  } else {
+  } else if (tile.classList.contains("blue")) {
     savage(state).removeClass("blue");
-    savage(state).addClass("red");
+    savage(state).addClass("yellow");
     tile.classList.remove("blue");
+    tile.classList.add("yellow");
+  } else {
+    savage(state).removeClass("yellow");
+    savage(state).addClass("red");
+    tile.classList.remove("yellow");
     tile.classList.add("red");
   }
-  count = 51 - ($(".red").length/2) - ($(".blue").length/2);
+  count = 51 - $(".st0.red").length - $(".st0.blue").length - $(".st0.yellow").length;
   if (count == 0) {
     $(".count-container").html("You're done!");
-  } else if (count == 1) {
-    $(".count-container").html("1 state to go!");
   } else {
     $(".count").html(count);
   }
@@ -92,24 +95,26 @@ $(".st0").click(function(e) {
   var tile = tiles.filter(function(t) {
     return t.getAttribute("data-name") == state.getAttribute("data-name");
   })[0];
-  console.log(tile)
 
   if (state.getAttribute("class") && state.getAttribute("class").includes("red")) {
     savage(state).removeClass("red");
     savage(state).addClass("blue");
     tile.classList.remove("red");
     tile.classList.add("blue");
-  } else {
+  } else if (state.getAttribute("class") && state.getAttribute("class").includes("blue")) {
     savage(state).removeClass("blue");
-    savage(state).addClass("red");
+    savage(state).addClass("yellow");
     tile.classList.remove("blue");
+    tile.classList.add("yellow");
+  } else {
+    savage(state).removeClass("yellow");
+    savage(state).addClass("red");
+    tile.classList.remove("yellow");
     tile.classList.add("red");
   }
-  count = 51 - ($(".red").length/2) - ($(".blue").length/2);
+  count = 51 - $(".st0.red").length - $(".st0.blue").length - $(".st0.yellow").length;
   if (count == 0) {
     $(".count-container").html("You're done!");
-  } else if (count == 1) {
-    $(".count-container").html("1 state to go!");
   } else {
     $(".count").html(count);
   }
@@ -127,18 +132,29 @@ $("text").click(function(e) {
     return s.getAttribute("data-name") == stateLabel;
   })[0];
 
-  if (match.getAttribute("class") && match.getAttribute("class").includes("red")) {
+  var tile = tiles.filter(function(t) {
+    return t.getAttribute("data-name") == stateLabel;
+  })[0];
+
+  if (tile.classList.contains("red")) {
     savage(match).removeClass("red");
     savage(match).addClass("blue");
-  } else {
+    tile.classList.remove("red");
+    tile.classList.add("blue");
+  } else if (tile.classList.contains("blue")) {
     savage(match).removeClass("blue");
+    savage(match).addClass("yellow");
+    tile.classList.remove("blue");
+    tile.classList.add("yellow");
+  } else {
+    savage(match).removeClass("yellow");
     savage(match).addClass("red");
+    tile.classList.remove("yellow");
+    tile.classList.add("red");
   }
-  count = 102 - $(".red").length - $(".blue").length;
+  count = 51 - $(".st0.red").length - $(".st0.blue").length - $(".st0.yellow").length;
   if (count == 0) {
     $(".count-container").html("You're done!");
-  } else if (count == 1) {
-    $(".count-container").html("1 state to go!");
   } else {
     $(".count").html(count);
   }
