@@ -23,6 +23,15 @@
 
         <div class="count-container"><span class="count">51</span> to go!</div>
 
+        <div class="grid">
+          <% csv.states.forEach(function(s) { %>
+            <div class="tile-container" data-name="<%= s.abbreviation %>">
+              <div class="desktop tile"><%= s.state %></div>
+              <div class="mobile tile"><%= s.abbreviation %></div>
+            </div>
+          <% }); %>
+        </div>
+
         <div class="container">
           <%= t.include("./assets/US_map.svg") %>
         </div>

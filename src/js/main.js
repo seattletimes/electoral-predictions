@@ -8,7 +8,7 @@ var $ = require("jquery");
 var qsa = require("./lib/qsa");
 var closest = require("./lib/closest");
 
-var count = 51;
+var count;
 
 var states = qsa("g").filter(function(s) {
   return s.getAttribute("data-name");
@@ -19,6 +19,8 @@ var states = qsa("g").filter(function(s) {
 })).concat(qsa("circle").filter(function(s) {
   return s.getAttribute("data-name");
 }));
+
+var tiles = qsa(".tile-container");
 
 var moment = require("moment");
 
@@ -44,6 +46,42 @@ var validate = function() {
   }
 }
 
+$(".tile-container").click(function(e) {
+  if (submitted) return;
+
+  var tile = e.target;
+  if (!tile.getAttribute("data-name")) {
+    tile = tile.closest(".tile-container");
+  }
+  var state = states.filter(function(s) {
+    return s.getAttribute("data-name") == tile.getAttribute("data-name");
+  })[0];
+
+  if (tile.classList.contains("red")) {
+    savage(state).removeClass("red");
+    savage(state).addClass("blue");
+    tile.classList.remove("red");
+    tile.classList.add("blue");
+  } else {
+    savage(state).removeClass("blue");
+    savage(state).addClass("red");
+    tile.classList.remove("blue");
+    tile.classList.add("red");
+  }
+  count = 51 - ($(".red").length/2) - ($(".blue").length/2);
+  if (count == 0) {
+    $(".count-container").html("You're done!");
+  } else if (count == 1) {
+    $(".count-container").html("1 state to go!");
+  } else {
+    $(".count").html(count);
+  }
+
+  mapValidated = true;
+  if (count !== 0) mapValidated = false;
+  validate();
+});
+
 $(".st0").click(function(e) {
   if (submitted) return;
 
@@ -51,14 +89,23 @@ $(".st0").click(function(e) {
   if (!state.getAttribute("data-name")) {
     state = state.closest("g");
   }
+  var tile = tiles.filter(function(t) {
+    return t.getAttribute("data-name") == state.getAttribute("data-name");
+  })[0];
+  console.log(tile)
+
   if (state.getAttribute("class") && state.getAttribute("class").includes("red")) {
     savage(state).removeClass("red");
     savage(state).addClass("blue");
+    tile.classList.remove("red");
+    tile.classList.add("blue");
   } else {
     savage(state).removeClass("blue");
     savage(state).addClass("red");
+    tile.classList.remove("blue");
+    tile.classList.add("red");
   }
-  count = 51 - $(".red").length - $(".blue").length;
+  count = 51 - ($(".red").length/2) - ($(".blue").length/2);
   if (count == 0) {
     $(".count-container").html("You're done!");
   } else if (count == 1) {
@@ -87,7 +134,7 @@ $("text").click(function(e) {
     savage(match).removeClass("blue");
     savage(match).addClass("red");
   }
-  count = 51 - $(".red").length - $(".blue").length;
+  count = 102 - $(".red").length - $(".blue").length;
   if (count == 0) {
     $(".count-container").html("You're done!");
   } else if (count == 1) {

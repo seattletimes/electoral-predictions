@@ -22,6 +22,50 @@ body {
   text-align: center;
 }
 
+.grid {
+  margin: 20px 0;
+}
+
+.tile-container {
+  display: inline-block;
+}
+
+.tile {
+  cursor: pointer;
+  background: @df-light-gray;
+  // background: #F0E5D5;
+  display: inline-block;
+  font-family: @df-sans;
+  font-size: 14px;
+  padding: 4px 8px 2px 8px;
+  border-radius: 2px;
+  margin-bottom: 6px;
+  margin-right: 2px;
+  border: 1px solid #999;
+
+  @media @mobile {
+    margin-bottom: 4px;
+    padding: 5px 8px 4px 8px;
+    font-size: 11px;
+    margin-right: 2px;
+    margin-bottom: 5px;
+  }
+
+  &.desktop {
+    @media @mobile {
+      display: none;
+    }
+  }
+
+  &.mobile {
+    display: none;
+
+    @media @mobile {
+      display: inline-block;
+    }
+  }
+}
+
 svg {
   overflow: hidden;
   position: absolute;
@@ -50,12 +94,18 @@ g {
   polygon, path, circle {
     fill: #da2128 !important;
   }
+  .tile {
+    background: lighten(#da2128, 25%);
+  }
 }
 .blue {
   fill: #2384c6 !important;
 
   polygon, path, circle {
     fill: #2384c6 !important;
+  }
+  .tile {
+    background: lighten(#2384c6, 25%);
   }
 }
 
