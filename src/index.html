@@ -3,6 +3,7 @@
   <head>
     <%= t.include("partials/_head.html") %>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://use.fontawesome.com/bd870dfa49.js"></script>
   </head>
   <body>
 
@@ -17,7 +18,7 @@
             <div class="phone">Daytime phone: <input maxlength="75" name="phone" placeholder="" required></div>
           </form>
           <button class="submit">SUBMIT</button>
-          <div class="message sending">Sending...</div>
+          <div class="message sending"><i class="fa fa-spinner fa-spin"></i> Sending...</div>
           <div class="message success">Success!</div>
         </div>
 
