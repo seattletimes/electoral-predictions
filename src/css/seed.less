@@ -88,6 +88,24 @@ g {
   }
 }
 
+.legend {
+  text-align: center;
+  padding-top: 15px;
+}
+
+.legend-line {
+  font-size: 15px;
+  font-family: @df-sans;
+  display: inline-block;
+  margin-right: 16px;
+}
+.swatch {
+  height: 12px;
+  width: 18px;
+  display: inline-block;
+  margin-right: 2px;
+}
+
 .red {
   fill: #d04549 !important;
 
@@ -96,6 +114,9 @@ g {
   }
   .tile {
     background: lighten(#d04549, 25%);
+  }
+  &.swatch {
+    background: #d04549;
   }
 }
 .blue {
@@ -107,6 +128,9 @@ g {
   .tile {
     background: lighten(#65addc, 25%);
   }
+  &.swatch {
+    background: #65addc;
+  }
 }
 .yellow {
   fill: #f4d26b !important;
@@ -117,10 +141,15 @@ g {
   .tile {
     background: lighten(#f4d26b, 15%);
   }
+  &.swatch {
+    background: #f4d26b;
+  }
 }
 
 form {
   display: inline-block;
+  padding-bottom: 10px;
+
   div {
     display: inline-block;
     font-family: @df-sans;
