@@ -24,6 +24,7 @@ body {
 
 .grid {
   margin: 20px 0;
+  margin-top: 10px;
 }
 
 .tile-container {
@@ -50,20 +51,6 @@ body {
     margin-right: 2px;
     margin-bottom: 5px;
   }
-
-  &.desktop {
-    @media @mobile {
-      display: none;
-    }
-  }
-
-  &.mobile {
-    display: none;
-
-    @media @mobile {
-      display: inline-block;
-    }
-  }
 }
 
 svg {
@@ -77,6 +64,7 @@ svg {
   text {
     font-family: @df-sans !important;
     letter-spacing: 0.04em;
+    font-weight: bold;
   }
 }
 
@@ -88,34 +76,46 @@ g {
   }
 }
 
+.electoral-label {
+  font-weight: bold;
+  font-family: @df-sans;
+  margin-top: 10px;
+}
+
+.electoral-count, .electoral-label {
+  @media @mobile {
+    display: none;
+  }
+}
+
 .red {
-  fill: #da2128 !important;
+  fill: #d04549 !important;
 
   polygon, path, circle {
-    fill: #da2128 !important;
+    fill: #d04549 !important;
   }
   .tile {
-    background: lighten(#da2128, 25%);
+    background: lighten(#d04549, 25%);
   }
 }
 .blue {
-  fill: #2384c6 !important;
+  fill: #65addc !important;
 
   polygon, path, circle {
-    fill: #2384c6 !important;
+    fill: #65addc !important;
   }
   .tile {
-    background: lighten(#2384c6, 25%);
+    background: lighten(#65addc, 25%);
   }
 }
 .yellow {
-  fill: #fecd5b !important;
+  fill: #f4d26b !important;
 
   polygon, path, circle {
-    fill: #fecd5b !important;
+    fill: #f4d26b !important;
   }
   .tile {
-    background: lighten(#fecd5b, 20%);
+    background: lighten(#f4d26b, 15%);
   }
 }
 

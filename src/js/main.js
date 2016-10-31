@@ -73,7 +73,8 @@ $(".tile-container").click(function(e) {
     tile.classList.remove("yellow");
     tile.classList.add("red");
   }
-  count = 51 - $(".st0.red").length - $(".st0.blue").length - $(".st0.yellow").length;
+  count = 51 - $(".tile-container.red").length - $(".tile-container.blue").length - $(".tile-container.yellow").length;
+  console.log("red", $(".tile-container.red").length, "blue", $(".tile-container.blue").length, "yellow", $(".tile-container.yellow").length)
   if (count == 0) {
     $(".count-container").html("You're done!");
   } else {
@@ -112,7 +113,9 @@ $(".st0").click(function(e) {
     tile.classList.remove("yellow");
     tile.classList.add("red");
   }
-  count = 51 - $(".st0.red").length - $(".st0.blue").length - $(".st0.yellow").length;
+  count = 51 - $(".tile-container.red").length - $(".tile-container.blue").length - $(".tile-container.yellow").length;
+  console.log("red", $(".tile-container.red").length, "blue", $(".tile-container.blue").length, "yellow", $(".tile-container.yellow").length)
+  
   if (count == 0) {
     $(".count-container").html("You're done!");
   } else {
@@ -152,7 +155,9 @@ $("text").click(function(e) {
     tile.classList.remove("yellow");
     tile.classList.add("red");
   }
-  count = 51 - $(".st0.red").length - $(".st0.blue").length - $(".st0.yellow").length;
+  count = 51 - $(".tile-container.red").length - $(".tile-container.blue").length - $(".tile-container.yellow").length;
+  console.log("red", $(".tile-container.red").length, "blue", $(".tile-container.blue").length, "yellow", $(".tile-container.yellow").length)
+
   if (count == 0) {
     $(".count-container").html("You're done!");
   } else {
