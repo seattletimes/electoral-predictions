@@ -14,12 +14,21 @@ body {
   padding-bottom: 75%;
 }
 
+.top-container {
+  text-align: center;
+
+  @media @mobile {
+    padding-bottom: 10px;
+  }
+}
+
 .count-container {
+  margin-right: 18px;
   font-family: @df-sans;
   font-size: 24px;
   font-weight: bold;
-  padding-top: 20px;
   text-align: center;
+  display: inline-block;
 }
 
 .grid {
@@ -80,9 +89,22 @@ g {
   font-weight: bold;
   font-family: @df-sans;
   margin-top: 10px;
+
+  .mobile {
+    display: none;
+
+    @media @mobile {
+      display: inline-block;
+    }
+  }
+  .no-mobile {
+    @media @mobile {
+      display: none;
+    }
+  }
 }
 
-.electoral-count, .electoral-label {
+.electoral-count {
   @media @mobile {
     display: none;
   }
@@ -93,15 +115,18 @@ g {
 }
 
 .legend {
-  text-align: center;
-  padding-top: 15px;
+  display: inline-block;
 }
 
 .legend-line {
   font-size: 15px;
   font-family: @df-sans;
   display: inline-block;
-  margin-right: 16px;
+  margin-right: 10px;
+
+  &:last-child {
+    margin-right: 0;
+  }
 }
 .swatch {
   height: 12px;
@@ -153,6 +178,7 @@ g {
 form {
   display: inline-block;
   padding-bottom: 10px;
+  font-weight: bold;
 
   div {
     display: inline-block;

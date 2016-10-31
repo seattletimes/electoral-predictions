@@ -53,6 +53,7 @@ $(".tile-container").click(function(e) {
   if (!tile.getAttribute("data-name")) {
     tile = tile.closest(".tile-container");
   }
+
   var state = states.filter(function(s) {
     return s.getAttribute("data-name") == tile.getAttribute("data-name");
   })[0];
@@ -92,6 +93,7 @@ $(".st0").click(function(e) {
   if (!state.getAttribute("data-name")) {
     state = state.closest("g");
   }
+
   var tile = tiles.filter(function(t) {
     return t.getAttribute("data-name") == state.getAttribute("data-name");
   })[0];

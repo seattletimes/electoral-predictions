@@ -11,6 +11,32 @@
 
       <div class="inner">
 
+        <div class="top-container">
+          <div class="count-container">
+            <div><span class="count">51</span> to go!</div>
+          </div>
+
+          <div class="legend">
+            <div class="legend-line"><div class="blue swatch"></div> Clinton</div>
+            <div class="legend-line"><div class="red swatch"></div> Trump</div>
+            <div class="legend-line"><div class="yellow swatch"></div> Other</div>
+          </div>
+        </div>
+
+        <div class="container">
+          <%= t.include("./assets/US_map.svg") %>
+        </div>
+
+        <div class="electoral-label">Keep track of <span class="mobile">what</span><span class="no-mobile">the electoral votes</span> you've predicted:</div>
+        <div class="grid">
+          <% csv.states.forEach(function(s) { %>
+            <div class="tile-container" data-name="<%= s.abbreviation %>">
+              <div class="tile"><strong><%= s.abbreviation %></strong> <span class="electoral-count"><%= s.count %></span></div>
+            </div>
+          <% }); %>
+        </div>
+
+
         <div class="form-panel">
           <form>
             <div class="name">Your name: <input maxlength="75" name="name" placeholder="" required></div>
@@ -20,27 +46,6 @@
           <button class="submit">SUBMIT</button>
           <div class="message sending"><i class="fa fa-spinner fa-spin"></i> Sending...</div>
           <div class="message success">Success!</div>
-        </div>
-
-        <div class="count-container"><span class="count">51</span> to go!</div>
-
-        <div class="legend">
-          <div class="legend-line"><div class="blue swatch"></div> Clinton</div>
-          <div class="legend-line"><div class="red swatch"></div> Trump</div>
-          <div class="legend-line"><div class="yellow swatch"></div> Other</div>
-        </div>
-
-        <div class="container">
-          <%= t.include("./assets/US_map.svg") %>
-        </div>
-
-        <div class="electoral-label">Electoral votes:</div>
-        <div class="grid">
-          <% csv.states.forEach(function(s) { %>
-            <div class="tile-container" data-name="<%= s.abbreviation %>">
-              <div class="tile"><strong><%= s.abbreviation %></strong> <span class="electoral-count"><%= s.count %></span></div>
-            </div>
-          <% }); %>
         </div>
 
       </div>
