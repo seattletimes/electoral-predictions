@@ -5,14 +5,12 @@
 require("component-responsive-frame/child");
 var savage = require("savage-query");
 var $ = require("jquery");
-var qsa = require("./lib/qsa");
-var closest = require("./lib/closest");
 
 var count;
 
-var states = qsa("[data-name]");
+var states = $("[data-name]");
 
-var tiles = qsa(".tile-container");
+var tiles = $(".tile-container");
 
 var moment = require("moment");
 
@@ -41,27 +39,26 @@ var validate = function() {
 $(".tile-container").click(function(e) {
   if (submitted) return;
 
-  var tile = closest(e.target, ".tile-container");
+  var tile = $(e.target).closest(".tile-container");
+  var postal = tile.attr("data-name");
 
-  var state = states.filter(function(s) {
-    return s.getAttribute("data-name") == tile.getAttribute("data-name");
-  })[0];
+  var state = states.filter(`[data-name="${postal}"]`);
 
-  if (tile.classList.contains("blue")) {
-    savage(state).removeClass("blue");
-    savage(state).addClass("red");
-    tile.classList.remove("blue");
-    tile.classList.add("red");
-  } else if (tile.classList.contains("red")) {
-    savage(state).removeClass("red");
-    savage(state).addClass("yellow");
-    tile.classList.remove("red");
-    tile.classList.add("yellow");
+  if (tile.hasClass("blue")) {
+    state.removeClass("blue");
+    state.addClass("red");
+    tile.removeClass("blue");
+    tile.addClass("red");
+  } else if (tile.hasClass("red")) {
+    state.removeClass("red");
+    state.addClass("yellow");
+    tile.removeClass("red");
+    tile.addClass("yellow");
   } else {
-    savage(state).removeClass("yellow");
-    savage(state).addClass("blue");
-    tile.classList.remove("yellow");
-    tile.classList.add("blue");
+    state.removeClass("yellow");
+    state.addClass("blue");
+    tile.removeClass("yellow");
+    tile.addClass("blue");
   }
   count = 51 - $(".tile-container.red").length - $(".tile-container.blue").length - $(".tile-container.yellow").length;
   if (count == 0) {
@@ -78,27 +75,26 @@ $(".tile-container").click(function(e) {
 $(".st0").click(function(e) {
   if (submitted) return;
 
-  var state = e.target.hasAttribute("data-name") ? e.target : closest(e.target, "g");
+  var state = $(e.target).closest("[data-name]");
+  var postal = state.attr("data-name");
 
-  var tile = tiles.filter(function(t) {
-    return t.getAttribute("data-name") == state.getAttribute("data-name");
-  })[0];
+  var tile = tiles.filter(`[data-name="${postal}"]`);
 
-  if (state.getAttribute("class") && state.getAttribute("class").indexOf("blue") > -1) {
-    savage(state).removeClass("blue");
-    savage(state).addClass("red");
-    tile.classList.remove("blue");
-    tile.classList.add("red");
-  } else if (state.getAttribute("class") && state.getAttribute("class").indexOf("red") > -1) {
-    savage(state).removeClass("red");
-    savage(state).addClass("yellow");
-    tile.classList.remove("red");
-    tile.classList.add("yellow");
+  if (state.hasClass("blue")) {
+    state.removeClass("blue");
+    state.addClass("red");
+    tile.removeClass("blue");
+    tile.addClass("red");
+  } else if (state.hasClass("red")) {
+    state.removeClass("red");
+    state.addClass("yellow");
+    tile.removeClass("red");
+    tile.addClass("yellow");
   } else {
-    savage(state).removeClass("yellow");
-    savage(state).addClass("blue");
-    tile.classList.remove("yellow");
-    tile.classList.add("blue");
+    state.removeClass("yellow");
+    state.addClass("blue");
+    tile.removeClass("yellow");
+    tile.addClass("blue");
   }
   count = 51 - $(".tile-container.red").length - $(".tile-container.blue").length - $(".tile-container.yellow").length;
 
@@ -117,29 +113,25 @@ $("text").click(function(e) {
   if (submitted) return;
 
   var stateLabel = e.target.textContent;
-  var match = states.filter(function(s) {
-    return s.getAttribute("data-name") == stateLabel;
-  })[0];
+  var match = states.filter(`[data-name="${stateLabel}"]`);
 
-  var tile = tiles.filter(function(t) {
-    return t.getAttribute("data-name") == stateLabel;
-  })[0];
+  var tile = tiles.filter(`[data-name="${stateLabel}"]`);
 
-  if (tile.classList.contains("blue")) {
-    savage(match).removeClass("blue");
-    savage(match).addClass("red");
-    tile.classList.remove("blue");
-    tile.classList.add("red");
-  } else if (tile.classList.contains("red")) {
-    savage(match).removeClass("red");
-    savage(match).addClass("yellow");
-    tile.classList.remove("red");
-    tile.classList.add("yellow");
+  if (tile.hasClass("blue")) {
+    match.removeClass("blue");
+    match.addClass("red");
+    tile.removeClass("blue");
+    tile.addClass("red");
+  } else if (tile.hasClass("red")) {
+    match.removeClass("red");
+    match.addClass("yellow");
+    tile.removeClass("red");
+    tile.addClass("yellow");
   } else {
-    savage(match).removeClass("yellow");
-    savage(match).addClass("blue");
-    tile.classList.remove("yellow");
-    tile.classList.add("blue");
+    match.removeClass("yellow");
+    match.addClass("blue");
+    tile.removeClass("yellow");
+    tile.addClass("blue");
   }
   count = 51 - $(".tile-container.red").length - $(".tile-container.blue").length - $(".tile-container.yellow").length;
 
