@@ -3,7 +3,6 @@
 // var track = require("./lib/tracking");
 
 require("component-responsive-frame/child");
-var savage = require("savage-query");
 var $ = require("jquery");
 
 var count;
