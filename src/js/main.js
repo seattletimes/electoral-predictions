@@ -10,15 +10,7 @@ var closest = require("./lib/closest");
 
 var count;
 
-var states = qsa("g").filter(function(s) {
-  return s.getAttribute("data-name");
-}).concat(qsa("polygon").filter(function(s) {
-  return s.getAttribute("data-name");
-})).concat(qsa("path").filter(function(s) {
-  return s.getAttribute("data-name");
-})).concat(qsa("circle").filter(function(s) {
-  return s.getAttribute("data-name");
-}));
+var states = qsa("[data-name]");
 
 var tiles = qsa(".tile-container");
 
@@ -49,10 +41,7 @@ var validate = function() {
 $(".tile-container").click(function(e) {
   if (submitted) return;
 
-  var tile = e.target;
-  if (!tile.getAttribute("data-name")) {
-    tile = tile.closest(".tile-container");
-  }
+  var tile = closest(e.target, ".tile-container");
 
   var state = states.filter(function(s) {
     return s.getAttribute("data-name") == tile.getAttribute("data-name");
@@ -89,21 +78,18 @@ $(".tile-container").click(function(e) {
 $(".st0").click(function(e) {
   if (submitted) return;
 
-  var state = e.target;
-  if (!state.getAttribute("data-name")) {
-    state = state.closest("g");
-  }
+  var state = e.target.hasAttribute("data-name") ? e.target : closest(e.target, "g");
 
   var tile = tiles.filter(function(t) {
     return t.getAttribute("data-name") == state.getAttribute("data-name");
   })[0];
 
-  if (state.getAttribute("class") && state.getAttribute("class").includes("blue")) {
+  if (state.getAttribute("class") && state.getAttribute("class").indexOf("blue") > -1) {
     savage(state).removeClass("blue");
     savage(state).addClass("red");
     tile.classList.remove("blue");
     tile.classList.add("red");
-  } else if (state.getAttribute("class") && state.getAttribute("class").includes("red")) {
+  } else if (state.getAttribute("class") && state.getAttribute("class").indexOf("red") > -1) {
     savage(state).removeClass("red");
     savage(state).addClass("yellow");
     tile.classList.remove("red");
@@ -115,7 +101,7 @@ $(".st0").click(function(e) {
     tile.classList.add("blue");
   }
   count = 51 - $(".tile-container.red").length - $(".tile-container.blue").length - $(".tile-container.yellow").length;
-  
+
   if (count == 0) {
     $(".count-container").html("You're done!");
   } else {
@@ -130,7 +116,7 @@ $(".st0").click(function(e) {
 $("text").click(function(e) {
   if (submitted) return;
 
-  var stateLabel = e.target.innerHTML;
+  var stateLabel = e.target.textContent;
   var match = states.filter(function(s) {
     return s.getAttribute("data-name") == stateLabel;
   })[0];
@@ -184,7 +170,7 @@ submit.on("click", function(e) {
   e.preventDefault();
 
   var packet = {};
-  
+
   packet.method = "prediction";
   packet.name = document.querySelector(".name input").value;
   packet.email = document.querySelector(".email input").value;
