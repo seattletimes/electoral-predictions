@@ -53,6 +53,10 @@ body {
   margin-right: 2px;
   border: 1px solid #999;
 
+  .submitted & {
+    cursor: default;
+  }
+
   @media @mobile {
     margin-bottom: 4px;
     padding: 5px 8px 4px 8px;
@@ -149,16 +153,16 @@ g {
   }
 }
 .blue {
-  fill: #65addc !important;
+  fill: darken(#65addc, 10%) !important;
 
   polygon, path, circle {
-    fill: #65addc !important;
+    fill: darken(#65addc, 10%) !important;
   }
   .tile {
-    background: lighten(#65addc, 25%);
+    background: lighten(#65addc, 15%);
   }
   &.swatch {
-    background: #65addc;
+    background: darken(#65addc, 10%);
   }
 }
 .yellow {

@@ -229,13 +229,7 @@ submit.on("click", function(e) {
     })
     $(".count-container").html("Thanks for your submission.");
     submitted = true;
-    $("svg").addClass("submitted");
-    // qsa(".blue").forEach(function(b) {
-    //   savage(b).removeClass("blue");
-    // });
-    // qsa(".red").forEach(function(r) {
-    //   savage(r).removeClass("red");
-    // });
+    $(".inner").addClass("submitted");
   });
 
 });
