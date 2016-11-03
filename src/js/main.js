@@ -172,7 +172,7 @@ submit.on("click", function(e) {
   var blueArray = "";
   var yellowArray = "";
 
-  states.forEach(function(state) {
+  states.each(function(i, state) {
     if (state.getAttribute("class") && state.getAttribute("class").includes("red")) {
       redArray += state.getAttribute("data-name") + " ";
     } else if (state.getAttribute("class") && state.getAttribute("class").includes("blue")) {
